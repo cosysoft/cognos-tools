@@ -1,0 +1,14 @@
+
+#hiddenSplitter *.split-pane-divider,
+
+#hiddenSplitter *.vertical-grabber, 
+
+#hiddenSplitter *.horizontal-grabber {
+
+    -fx-background-color: null;
+
+    -fx-border-color: null;
+
+    -fx-padding: 3px;
+
+}
