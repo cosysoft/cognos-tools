@@ -20,7 +20,7 @@ public class ContentTreeService extends Service<TreeItem<BaseClass>> {
 
 			@Override
 			protected TreeItem<BaseClass> call() throws Exception {
-				return BiBusHelper.buildContentTree();
+				return BiBusHelper.getInstance().buildContentTree();
 			}
 		};
 	}

@@ -382,13 +382,13 @@ public class ReportObject {
 	}
 
 	public boolean saveReport(CRNConnect connection, BaseClass parent,
-			String reportName) {
+			BaseClass reportName) {
 		// sn_dg_prm_smpl_modifyreport_P4_start_0
-		Report rpt = new Report();
+		Report rpt = (Report) reportName;
 		AddOptions addOpts = new AddOptions();
 		TokenProp rptDefaultName = new TokenProp();
 		AnyTypeProp ap = new AnyTypeProp();
-		rptDefaultName.setValue(reportName);
+		rptDefaultName.setValue(reportName.getDefaultName().getValue());
 		String reportXML = getXML();
 
 		int iStartReport = reportXML.indexOf("<report");

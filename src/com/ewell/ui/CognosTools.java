@@ -19,11 +19,10 @@ import com.cognos.developer.schemas.bibus._3.BaseClass;
 import com.ewell.ui.launch.Skeleton;
 import com.ewell.ui.task.ContentTreeService;
 
-
 /**
  * 
  * @author comfort
- *
+ * 
  */
 public class CognosTools extends Application implements Skeleton {
 
@@ -69,15 +68,15 @@ public class CognosTools extends Application implements Skeleton {
 		// TabPane tp = (TabPane) parent.lookup("#mainTab");
 		System.out.println(contentNav);
 
-		ContentTreeService ctService = new ContentTreeService();
+		final ContentTreeService ctService = new ContentTreeService();
 		ctService.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
 			@Override
 			public void handle(WorkerStateEvent arg0) {
-				contentNav.setRoot(root);
+				contentNav.setRoot(ctService.getValue());
 				contentNav.getRoot().setExpanded(true);
 			}
 		});
-		// ctService.start();
+		ctService.start();
 	}
 
 	private void maximize(Stage primaryStage) {

@@ -1,14 +1,12 @@
-package com.ibm.cognos;
-
 /** 
- Licensed Materials - Property of IBM
+Licensed Materials - Property of IBM
 
- IBM Cognos Products: DOCS
+IBM Cognos Products: DOCS
 
- (C) Copyright IBM Corp. 2005, 2010
+(C) Copyright IBM Corp. 2005, 2010
 
- US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with
- IBM Corp.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with
+IBM Corp.
  */
 /**
  *
@@ -20,6 +18,8 @@ package com.ibm.cognos;
  * This class is used by a DOM parser to add the appropriate element
  * tags to a new report.
  */
+
+package com.ibm.cognos;
 
 import java.io.ByteArrayInputStream;
 import java.util.List;

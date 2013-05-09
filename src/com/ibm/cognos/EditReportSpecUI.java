@@ -425,8 +425,8 @@ public class EditReportSpecUI extends JFrame {
 		// Add the xmlns namespace back into the report specification
 		// before updating Content Manager.
 		newReport.updateReportNS();
-		newReport.saveReport(connection, oldReport.getBaseClassObject()
-				.getParent().getValue()[0], oldReport.toString());
+		// newReport.saveReport(connection, oldReport.getBaseClassObject()
+		// .getParent().getValue()[0], oldReport.toString());
 		newReport.renderReport(connection, oldReport.getBaseClassObject()
 				.getSearchPath().getValue());
 		output = "Report: " + oldReport + " updated successfully";
