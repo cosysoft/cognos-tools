@@ -1,11 +1,14 @@
 package com.ewell.ui;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.concurrent.WorkerStateEvent;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -18,6 +21,11 @@ import javafx.stage.Window;
 import com.cognos.developer.schemas.bibus._3.BaseClass;
 import com.ewell.ui.launch.Skeleton;
 import com.ewell.ui.task.ContentTreeService;
+import com.ewell.ui.util.FXMLLoaderUtil;
+import com.ewell.ui.view.App;
+import com.ewell.ui.view.Login;
+import com.ibm.cognos.CRNConnect;
+import com.ibm.cognos.Logon;
 
 /**
  * 
@@ -37,11 +45,50 @@ public class CognosTools extends Application implements Skeleton {
 	public static Skeleton skeleton;
 
 	@Override
-	public void start(Stage primaryStage) throws Exception {
+	public void start(final Stage primaryStage) throws Exception {
 
+		Pane login = (Pane) FXMLLoaderUtil.loadConvention(Login.class);
+		Scene loginScene = new Scene(login);
+
+		loginScene.getStylesheets().add(
+				CognosTools.class.getResource("app.css").toExternalForm());
+		
+		final Stage loginStage = new Stage();
+		loginStage.setScene(loginScene);
+
+		loginStage.getIcons().addAll(
+				new Image(CognosTools.class.getResource("cognos.jpg")
+						.openStream()));
+		loginStage.setTitle("Cognos-toos 登录");
+		loginStage.setResizable(false);
+		loginStage.show();
+		
+		Button loginBtn = (Button) loginScene.lookup("#login");
+		
+		loginBtn.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				try {
+					CRNConnect connect = BiBusHelper.getInstance().getConnect();
+					Logon sessionLogon = new Logon();
+					while (!Logon.loggedIn(connect)) {
+						sessionLogon.logon(connect);
+					}
+					
+					loginStage.close();
+					showMain(primaryStage);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+			}
+		});
+	}
+
+	private void showMain(Stage primaryStage) throws IOException {
 		skeleton = this;
-		parent = (Pane) FXMLLoader.load(CognosTools.class
-				.getResource("App.fxml"));
+		parent = (Pane) FXMLLoaderUtil.loadConvention(App.class);
 		Scene myScene = new Scene(parent);
 
 		myScene.getStylesheets().add(

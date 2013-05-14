@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.PasswordField?>
+
+<GridPane alignment="CENTER" gridLinesVisible="false" hgap="0.0" prefHeight="200.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.ewell.ui.view.Login">
+  <!-- TODO Add Nodes -->
+  <children>
+    <Label text="名称空间" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+    <Label prefHeight="-1.0" prefWidth="-1.0" text="用户" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <Label text="密码" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <HBox fx:id="nsPane" alignment="CENTER" prefHeight="-1.0" prefWidth="-1.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+    <TextField fx:id="userNameInput" prefWidth="178.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+    <PasswordField  fx:id="passwordInput" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <children>
+        <Button id="login" mnemonicParsing="false" prefWidth="70.0" text="登陆" />
+        <Button mnemonicParsing="false" onAction="#cancel" prefWidth="70.0" text="取消" />
+      </children>
+    </HBox>
+  </children>
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+  </columnConstraints>
+  <padding>
+    <Insets left="15.0" right="15.0" />
+  </padding>
+  <rowConstraints>
+    <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="65.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="65.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="65.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+</GridPane>

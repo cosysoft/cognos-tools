@@ -19,7 +19,6 @@ import com.cognos.developer.schemas.bibus._3.SearchPathSingleObject;
 import com.cognos.developer.schemas.bibus._3.Sort;
 import com.cognos.developer.schemas.bibus._3.SpecificationFormatEnum;
 import com.ibm.cognos.CRNConnect;
-import com.ibm.cognos.Logon;
 import com.ibm.cognos.ReportObject;
 
 /**
@@ -53,13 +52,6 @@ public class BiBusHelper {
 	}
 
 	public TreeItem<BaseClass> buildContentTree() {
-
-		Logon sessionLogon = new Logon();
-		connect.connectToCognosServer();
-
-		while (!Logon.loggedIn(connect)) {
-			sessionLogon.logon(connect);
-		}
 
 		TreeItem<BaseClass> root = null;
 		BaseClass myCMObject = null;

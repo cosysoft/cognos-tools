@@ -1,12 +1,8 @@
-package com.ewell.ui;
-
-import java.net.URL;
-import java.util.ResourceBundle;
+package com.ewell.ui.view;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TreeCell;
@@ -19,6 +15,7 @@ import javafx.stage.Popup;
 import javafx.util.Callback;
 
 import com.cognos.developer.schemas.bibus._3.BaseClass;
+import com.ewell.ui.CognosTools;
 import com.ewell.ui.cell.DefaultContentCell;
 
 /**
@@ -26,7 +23,7 @@ import com.ewell.ui.cell.DefaultContentCell;
  * @author Bluesky Yao
  * 
  */
-public class App extends AnchorPane implements Initializable {
+public class App extends AnchorPane {
 
 	@FXML
 	private TreeView<BaseClass> contentNav;
@@ -52,8 +49,8 @@ public class App extends AnchorPane implements Initializable {
 
 	}
 
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	@FXML
+	public void initialize() {
 		contentNav
 				.setCellFactory(new Callback<TreeView<BaseClass>, TreeCell<BaseClass>>() {
 					@Override

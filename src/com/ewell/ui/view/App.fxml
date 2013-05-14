@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.Camera?>
+<?import javafx.scene.PerspectiveCamera?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.web.*?>
+<?import javafx.scene.web.WebView?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.ewell.ui.view.App">
+  <children>
+    <BorderPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <bottom>
+        <AnchorPane minHeight="15.0" prefHeight="20.0" prefWidth="200.0">
+          <children>
+            <ProgressBar fx:id="progressBar" prefWidth="200.0" progress="0.0" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="2.0">
+              <effect>
+                <MotionBlur />
+              </effect>
+            </ProgressBar>
+          </children>
+        </AnchorPane>
+      </bottom>
+      <center>
+        <SplitPane id="hiddenSplitter" dividerPositions="0.37969924812030076" focusTraversable="true" prefHeight="160.0" prefWidth="200.0">
+          <items>
+            <AnchorPane maxWidth="300.0" minHeight="0.0" minWidth="100.0" prefHeight="160.0" prefWidth="300.0">
+              <children>
+                <TreeView fx:id="contentNav" maxWidth="350.0" prefHeight="-1.0" prefWidth="250.0" showRoot="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+              </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+              <children>
+                <SplitPane id="mainPane" dividerPositions="0.7101449275362319" focusTraversable="true" orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <items>
+                    <TabPane fx:id="mainTab" tabClosingPolicy="ALL_TABS">
+                      <Tab closable="true" text="Welcome">
+                        <WebView fx:id="browser" fontSmoothingType="LCD" />
+                      </Tab>
+                    </TabPane>
+                    <TabPane id="cam" tabClosingPolicy="UNAVAILABLE" />
+                  </items>
+                </SplitPane>
+              </children>
+            </AnchorPane>
+          </items>
+        </SplitPane>
+      </center>
+      <top>
+        <MenuBar>
+          <menus>
+            <Menu mnemonicParsing="false" text="文件">
+              <items>
+                <MenuItem mnemonicParsing="false" text="退出" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="编辑">
+              <items>
+                <MenuItem mnemonicParsing="false" text="删除" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="帮助">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#show" text="关于" />
+              </items>
+            </Menu>
+          </menus>
+        </MenuBar>
+      </top>
+    </BorderPane>
+  </children>
+</AnchorPane>

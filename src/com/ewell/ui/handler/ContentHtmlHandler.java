@@ -9,8 +9,8 @@ import javafx.scene.control.TabPane;
 import javafx.scene.web.WebView;
 
 import com.cognos.developer.schemas.bibus._3.BaseClass;
-import com.ewell.ui.App;
 import com.ewell.ui.BiBusHelper;
+import com.ewell.ui.view.App;
 import com.ibm.cognos.CRNConnect;
 
 public class ContentHtmlHandler implements EventHandler<ActionEvent> {

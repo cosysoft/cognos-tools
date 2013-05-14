@@ -1,55 +1,26 @@
 package com.ewell.ui.view;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.control.Button;
+import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.AnchorPane;
 
 import com.cognos.developer.schemas.bibus._3.BaseClass;
 import com.ewell.ui.BiBusHelper;
 
-public class ReportSpec extends AnchorPane {
+public class ReportSpecEdit {
 
 	private BaseClass preport;
 	private BaseClass report;
-
-	// @FXML
+	
+	@FXML
 	private TextArea content;
 
-	public ReportSpec() {
+	public ReportSpecEdit() {
 		super();
-		// FXMLLoader fxmlLoader = new FXMLLoader(new url);
-		// fxmlLoader.setRoot(this);
-
-		// try {
-		// fxmlLoader.load();
-		// } catch (IOException exception) {
-		// throw new RuntimeException(exception);
-		// }
-
-		content = new TextArea();
-		reload();
-		Button saveBtn = new Button("save");
-
-		saveBtn.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent arg0) {
-				ReportSpec.this.save();
-
-			}
-		});
-
-		getChildren().addAll(content, saveBtn);
 	}
 
 	public void setTarget(BaseClass report, BaseClass preport) {
-
 		this.report = report;
 		this.preport = preport;
-		reload();
-
 	}
 
 	public BaseClass getReport() {
@@ -65,7 +36,7 @@ public class ReportSpec extends AnchorPane {
 		content.setText(xml);
 	}
 
-	// @FXML
+	@FXML
 	public void save() {
 		BiBusHelper.getInstance().editSpec(report, preport, content.getText());
 	}
@@ -78,4 +49,8 @@ public class ReportSpec extends AnchorPane {
 		this.preport = preport;
 	}
 
+	@FXML
+	void initialize() {
+		reload();
+	}
 }
