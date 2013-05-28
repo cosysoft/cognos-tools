@@ -33,7 +33,7 @@
           <items>
             <AnchorPane maxWidth="300.0" minHeight="0.0" minWidth="100.0" prefHeight="160.0" prefWidth="300.0">
               <children>
-                <TreeView fx:id="contentNav" maxWidth="500.0" prefHeight="-1.0" prefWidth="250.0" showRoot="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                <TreeView fx:id="contentNav" maxWidth="350.0" prefHeight="-1.0" prefWidth="250.0" showRoot="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
               </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -54,9 +54,9 @@
         </SplitPane>
       </center>
       <top>
-        <MenuBar fx:id="menuBar">
+        <MenuBar>
           <menus>
-            <Menu mnemonicParsing="false" text="文件">
+            <Menu mnemonicParsing="false" text="文件" >
               <items>
                 <MenuItem mnemonicParsing="false" text="退出" />
               </items>

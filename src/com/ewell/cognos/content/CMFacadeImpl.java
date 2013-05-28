@@ -1,5 +1,10 @@
-package com.ewell.ui;
+package com.ewell.cognos.content;
 
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javafx.scene.control.CheckBoxTreeItem;
 import javafx.scene.control.TreeItem;
 
 import com.cognos.developer.schemas.bibus._3.AsynchDetailReportObject;
@@ -21,84 +26,32 @@ import com.cognos.developer.schemas.bibus._3.SpecificationFormatEnum;
 import com.ibm.cognos.CRNConnect;
 import com.ibm.cognos.ReportObject;
 
-/**
- * 
- * @author cosysoft
- * 
- */
-public class BiBusHelper {
+public class CMFacadeImpl implements CMFacade {
 
-	private CRNConnect connect = new CRNConnect();
+	private CRNConnect connect;
+	private static String searchPath = "/content/folder[@name='练习文件夹']";
 
-	public CRNConnect getConnect() {
-		return connect;
-	}
-
-	public void setConnect(CRNConnect connect) {
-		this.connect = connect;
-	}
-
-	static String searchPath = "/content"; // / root
-
-	static String passportID;
-
-	private static BiBusHelper instance;
-
-	public static BiBusHelper getInstance() {
-		if (instance == null) {
-			instance = new BiBusHelper();
-		}
-		return instance;
-	}
-
-	public TreeItem<BaseClass> buildContentTree() {
-
-		TreeItem<BaseClass> root = null;
-		BaseClass myCMObject = null;
-
+	@Override
+	public ContentItem getFolder(String searchPath) {
 		try {
-			myCMObject = BiBusHelper.getInstance().getCMSignleObject(
-					searchPath, connect);
-			if (myCMObject != null) {
-				root = new TreeItem<BaseClass>(myCMObject);
-			}
-			if (myCMObject.getHasChildren().isValue()) {
-				innerBuild(root, connect);
-			}
-		} catch (Exception remoteEx) {
-			remoteEx.printStackTrace();
+			BaseClass myCMObject = null;
+
+			SearchPathMultipleObject cmSearchPath = new SearchPathMultipleObject(
+					searchPath);
+			PropEnum[] properties = { PropEnum.defaultName,
+					PropEnum.searchPath, PropEnum.objectClass,
+					PropEnum.hasChildren, PropEnum.iconURI, PropEnum.storeID };
+			myCMObject = (connect.getCMService().query(cmSearchPath,
+					properties, new Sort[] {}, new QueryOptions()))[0];
+
+			return new ContentItem(myCMObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException();
 		}
-
-		System.out.println(myCMObject.getDefaultName());
-
-		return root;
 	}
 
-	void innerBuild(TreeItem<BaseClass> item, CRNConnect connect)
-			throws Exception {
-		if (!item.getValue().getHasChildren().isValue()) {
-			return;
-		}
-		String searchPath = item.getValue().getSearchPath().getValue();
-
-		BaseClass[] children = BiBusHelper.getInstance().getCMMultipleObject(
-				searchPath, connect);
-
-		for (int i = 0; i < children.length; i++) {
-			item.getChildren().add(new TreeItem<BaseClass>(children[i]));
-
-		}
-
-		for (TreeItem<BaseClass> ii : item.getChildren()) {
-			if (ii.getValue().getHasChildren().isValue()) {
-				innerBuild(ii, connect);
-			}
-		}
-
-	}
-
-	public BaseClass[] getCMMultipleObject(String searchPath, CRNConnect connect)
-			throws Exception {
+	private List<ContentItem> getContentItems(String searchPath) {
 
 		String appendString = "";
 
@@ -128,29 +81,94 @@ public class BiBusHelper {
 		Sort[] nodeSorts = new Sort[] { nodeSortType, nodeSortName };
 
 		cmSearchPath.set_value(searchPath + appendString);
-		children = connect.getCMService().query(cmSearchPath, properties,
-				nodeSorts, new QueryOptions());
+		try {
+			children = connect.getCMService().query(cmSearchPath, properties,
+					nodeSorts, new QueryOptions());
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			throw new RuntimeException();
+		}
+		List<ContentItem> items = new ArrayList<ContentItem>();
 
-		return children;
+		for (int i = 0; i < children.length; i++) {
+			items.add(new ContentItem(children[i]));
+		}
+		return items;
 	}
 
-	public BaseClass getCMSignleObject(String searchPath, CRNConnect connect)
-			throws Exception {
-		BaseClass myCMObject = null;
-
-		SearchPathMultipleObject cmSearchPath = new SearchPathMultipleObject(
-				searchPath);
-		PropEnum[] properties = { PropEnum.defaultName, PropEnum.searchPath,
-				PropEnum.objectClass, PropEnum.hasChildren, PropEnum.iconURI,
-				PropEnum.storeID };
-		myCMObject = (connect.getCMService().query(cmSearchPath, properties,
-				new Sort[] {}, new QueryOptions()))[0];
-
-		return myCMObject;
+	@Override
+	public ContentItem buildContentTree(ContentItem root) {
+		innerBuild(root);
+		return root;
 	}
 
-	public String getReportSpec(BaseClass report) {
+	private void innerBuild(ContentItem item) {
+		if (!item.isChildrenHas()) {
+			return;
+		}
+		List<ContentItem> children = this.getContentItems(item.getSearchPath());
+		item.setChildren(children);
+		for (ContentItem i : item.getChildren()) {
+			if (i.isChildrenHas()) {
+				innerBuild(i);
+			}
+		}
+	}
+
+	public CMFacadeImpl(CRNConnect connect) {
+		this.connect = connect;
+	}
+
+	@Override
+	public TreeItem<ContentItem> buildContentTree() {
+
+		TreeItem<ContentItem> root = null;
+
+		try {
+			ContentItem item = this.getFolder(searchPath);
+			if (item != null) {
+				root = new TreeItem<ContentItem>(item);
+			}
+			if (item.isChildrenHas()) {
+				innerBuild(root);
+			}
+		} catch (Exception remoteEx) {
+			remoteEx.printStackTrace();
+		}
+
+		return root;
+	}
+
+	private void innerBuild(TreeItem<ContentItem> item) throws Exception {
+		if (!item.getValue().isChildrenHas()) {
+			return;
+		}
+		List<ContentItem> children = this.getContentItems(item.getValue()
+				.getSearchPath());
+
+		for (ContentItem c : children) {
+			item.getChildren().add(new TreeItem<>(c));
+		}
+
+		for (TreeItem<ContentItem> ii : item.getChildren()) {
+			if (ii.getValue().isChildrenHas()) {
+				innerBuild(ii);
+			}
+		}
+
+	}
+
+	@Override
+	public ContentItem getContentItem(String searchPath) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getReportSpec(ContentItem report2) {
 		String reportSpec = "";
+
+		BaseClass report = report2.getContent();
 
 		if ((connect.getReportService() != null) && (report != null)
 		// && (connect.getDefaultSavePath() != null)
@@ -214,9 +232,11 @@ public class BiBusHelper {
 		return reportSpec;
 	}
 
-	public String editSpec(BaseClass oldReport, BaseClass preport,
+	@Override
+	public int editReportSpec(ContentItem oldReport2, ContentItem preport,
 			String reportSpec) {
-		String output = "";
+
+		BaseClass oldReport = oldReport2.getContent();
 
 		String packageName = getPackageSearchPath(oldReport);
 
@@ -227,10 +247,9 @@ public class BiBusHelper {
 
 		newReport.updateReportNS();
 		// newReport.saveReport(connect, preport, oldReport);
-		newReport.updateReport(connect, preport.getSearchPath().getValue(),
-				oldReport.getDefaultName().getValue());
-		output = "Report: " + oldReport + " updated successfully";
-		return output;
+		newReport.updateReport(connect, preport.getSearchPath(), oldReport
+				.getDefaultName().getValue());
+		return 0;
 	}
 
 	private String getPackageSearchPath(BaseClass report) {
@@ -267,4 +286,47 @@ public class BiBusHelper {
 		// return packagePath;
 	}
 
+	@Override
+	public CheckBoxTreeItem<ContentItem> buildContentTreeCK() {
+		CheckBoxTreeItem<ContentItem> root = null;
+		try {
+			ContentItem item = this.getFolder(searchPath);
+			if (item != null) {
+				root = new CheckBoxTreeItem<ContentItem>(item);
+			}
+			if (item.isChildrenHas()) {
+				innerBuild(root);
+			}
+		} catch (Exception remoteEx) {
+			remoteEx.printStackTrace();
+		}
+
+		return root;
+	}
+
+	private void innerBuild(CheckBoxTreeItem<ContentItem> item)
+			throws Exception {
+		if (!item.getValue().isChildrenHas()) {
+			return;
+		}
+		List<ContentItem> children = this.getContentItems(item.getValue()
+				.getSearchPath());
+
+		for (ContentItem c : children) {
+			item.getChildren().add(new CheckBoxTreeItem<>(c));
+		}
+
+		for (TreeItem<ContentItem> ii : item.getChildren()) {
+			if (ii.getValue().isChildrenHas()) {
+				innerBuild(ii);
+			}
+		}
+
+	}
+
+	@Override
+	public int[] editReportSpecBatch(List<ContentItem> oldReports,
+			List<ContentItem> preports, List<String> reportSpecs) {
+		return null;
+	}
 }

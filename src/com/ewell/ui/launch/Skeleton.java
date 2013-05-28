@@ -6,7 +6,9 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.stage.Window;
 
-import com.cognos.developer.schemas.bibus._3.BaseClass;
+import com.ewell.cognos.content.CMFacade;
+import com.ewell.cognos.content.ContentItem;
+import com.ibm.cognos.CRNConnect;
 
 /**
  * 
@@ -20,7 +22,7 @@ public interface Skeleton {
 	 * 
 	 * @return
 	 */
-	TreeItem<BaseClass> getContentTree();
+	TreeItem<ContentItem> getContentTree();
 
 	/**
 	 * app main window
@@ -29,10 +31,14 @@ public interface Skeleton {
 	 */
 	Window getMainWindow();
 
-	TreeView<BaseClass> getContentNav();
+	TreeView<ContentItem> getContentNav();
 
 	SplitPane getMainPane();
 
 	Scene getMainScene();
+
+	CMFacade getCMFacade();
+	
+	CRNConnect getConnect();
 
 }

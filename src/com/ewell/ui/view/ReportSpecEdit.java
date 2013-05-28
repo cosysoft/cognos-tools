@@ -3,13 +3,13 @@ package com.ewell.ui.view;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 
-import com.cognos.developer.schemas.bibus._3.BaseClass;
-import com.ewell.ui.BiBusHelper;
+import com.ewell.cognos.content.ContentItem;
+import com.ewell.ui.CognosTools;
 
 public class ReportSpecEdit {
 
-	private BaseClass preport;
-	private BaseClass report;
+	private ContentItem preport;
+	private ContentItem report;
 	
 	@FXML
 	private TextArea content;
@@ -18,34 +18,34 @@ public class ReportSpecEdit {
 		super();
 	}
 
-	public void setTarget(BaseClass report, BaseClass preport) {
+	public void setTarget(ContentItem report, ContentItem preport) {
 		this.report = report;
 		this.preport = preport;
 	}
 
-	public BaseClass getReport() {
+	public ContentItem getReport() {
 		return report;
 	}
 
-	public void setReport(BaseClass report) {
+	public void setReport(ContentItem report) {
 		this.report = report;
 	}
 
 	public void reload() {
-		String xml = BiBusHelper.getInstance().getReportSpec(report);
+		String xml = CognosTools.skeleton.getCMFacade().getReportSpec(report);
 		content.setText(xml);
 	}
 
 	@FXML
 	public void save() {
-		BiBusHelper.getInstance().editSpec(report, preport, content.getText());
+		CognosTools.skeleton.getCMFacade().editReportSpec(report, preport, content.getText());
 	}
 
-	public BaseClass getPreport() {
+	public ContentItem getPreport() {
 		return preport;
 	}
 
-	public void setPreport(BaseClass preport) {
+	public void setPreport(ContentItem preport) {
 		this.preport = preport;
 	}
 

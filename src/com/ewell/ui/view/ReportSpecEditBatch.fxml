@@ -16,6 +16,11 @@
     </HBox>
   </bottom>
   <center>
-    <TextArea fx:id="content" prefHeight="-1.0" prefWidth="-1.0" wrapText="true" />
+    <SplitPane dividerPositions="0.5009823182711198" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0">
+      <items>
+        <TextArea id="content" fx:id="srcContent" prefHeight="-1.0" prefWidth="-1.0" wrapText="true" />
+        <TextArea fx:id="tarContent" prefWidth="200.0" wrapText="true" />
+      </items>
+    </SplitPane>
   </center>
 </BorderPane>

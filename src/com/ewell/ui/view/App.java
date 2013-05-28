@@ -3,6 +3,10 @@ package com.ewell.ui.view;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuBuilder;
+import javafx.scene.control.MenuItemBuilder;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TreeCell;
@@ -14,9 +18,10 @@ import javafx.scene.web.WebView;
 import javafx.stage.Popup;
 import javafx.util.Callback;
 
-import com.cognos.developer.schemas.bibus._3.BaseClass;
+import com.ewell.cognos.content.ContentItem;
 import com.ewell.ui.CognosTools;
 import com.ewell.ui.cell.DefaultContentCell;
+import com.ewell.ui.menu.action.BatchReportEdit;
 
 /**
  * 
@@ -26,7 +31,7 @@ import com.ewell.ui.cell.DefaultContentCell;
 public class App extends AnchorPane {
 
 	@FXML
-	private TreeView<BaseClass> contentNav;
+	private TreeView<ContentItem> contentNav;
 	@FXML
 	private WebView browser;
 	@FXML
@@ -34,6 +39,9 @@ public class App extends AnchorPane {
 
 	@FXML
 	public static TabPane mainTab;
+
+	@FXML
+	private MenuBar menuBar;
 
 	@FXML
 	public void show(ActionEvent e) {
@@ -52,9 +60,9 @@ public class App extends AnchorPane {
 	@FXML
 	public void initialize() {
 		contentNav
-				.setCellFactory(new Callback<TreeView<BaseClass>, TreeCell<BaseClass>>() {
+				.setCellFactory(new Callback<TreeView<ContentItem>, TreeCell<ContentItem>>() {
 					@Override
-					public TreeCell<BaseClass> call(TreeView<BaseClass> arg0) {
+					public TreeCell<ContentItem> call(TreeView<ContentItem> arg0) {
 						return new DefaultContentCell();
 					}
 				});
@@ -69,6 +77,27 @@ public class App extends AnchorPane {
 					}
 				});
 		progressBar.setProgress(.8);
+
+		menuBar.getMenus().clear();
+
+		Menu file = MenuBuilder
+				.create()
+				.text("file")
+				.items(MenuItemBuilder.create().text("New").build(),
+						MenuItemBuilder.create().text("New Batch Update")
+								.onAction(new BatchReportEdit()).build(),
+						MenuItemBuilder.create().text("Exit")
+								.onAction(new EventHandler<ActionEvent>() {
+
+									@Override
+									public void handle(ActionEvent arg0) {
+										System.exit(0);
+
+									}
+
+								}).build()).build();
+
+		menuBar.getMenus().addAll(file);
 
 	}
 

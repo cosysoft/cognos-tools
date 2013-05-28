@@ -4,23 +4,23 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.control.TreeItem;
 
-import com.cognos.developer.schemas.bibus._3.BaseClass;
-import com.ewell.ui.BiBusHelper;
+import com.ewell.cognos.content.ContentItem;
+import com.ewell.ui.CognosTools;
 
 /**
  * 
  * @author Bluesky Yao
  * 
  */
-public class ContentTreeService extends Service<TreeItem<BaseClass>> {
+public class ContentTreeService extends Service<TreeItem<ContentItem>> {
 
 	@Override
-	protected Task<TreeItem<BaseClass>> createTask() {
-		return new Task<TreeItem<BaseClass>>() {
+	protected Task<TreeItem<ContentItem>> createTask() {
+		return new Task<TreeItem<ContentItem>>() {
 
 			@Override
-			protected TreeItem<BaseClass> call() throws Exception {
-				return BiBusHelper.getInstance().buildContentTree();
+			protected TreeItem<ContentItem> call() throws Exception {
+				return CognosTools.skeleton.getCMFacade().buildContentTreeCK();
 			}
 		};
 	}

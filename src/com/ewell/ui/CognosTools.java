@@ -18,7 +18,9 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
-import com.cognos.developer.schemas.bibus._3.BaseClass;
+import com.ewell.cognos.content.CMFacade;
+import com.ewell.cognos.content.CMFacadeImpl;
+import com.ewell.cognos.content.ContentItem;
 import com.ewell.ui.launch.Skeleton;
 import com.ewell.ui.task.ContentTreeService;
 import com.ewell.ui.util.FXMLLoaderUtil;
@@ -35,9 +37,12 @@ import com.ibm.cognos.Logon;
 public class CognosTools extends Application implements Skeleton {
 
 	private Window mainWindow;
-	private TreeItem<BaseClass> root;
-	private TreeView<BaseClass> contentNav;
+	private TreeItem<ContentItem> root;
+	private TreeView<ContentItem> contentNav;
 	private SplitPane mainPane;
+
+	private CMFacade cmFacade;
+	private CRNConnect connect;
 
 	private Pane parent;
 	private Scene mainScene;
@@ -52,7 +57,7 @@ public class CognosTools extends Application implements Skeleton {
 
 		loginScene.getStylesheets().add(
 				CognosTools.class.getResource("app.css").toExternalForm());
-		
+
 		final Stage loginStage = new Stage();
 		loginStage.setScene(loginScene);
 
@@ -62,26 +67,27 @@ public class CognosTools extends Application implements Skeleton {
 		loginStage.setTitle("Cognos-toos 登录");
 		loginStage.setResizable(false);
 		loginStage.show();
-		
+
 		Button loginBtn = (Button) loginScene.lookup("#login");
-		
+
 		loginBtn.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent arg0) {
 				try {
-					CRNConnect connect = BiBusHelper.getInstance().getConnect();
-					Logon sessionLogon = new Logon();
+					connect = Login.connect;
+					Logon sessionLogon = Login.logon;
 					while (!Logon.loggedIn(connect)) {
 						sessionLogon.logon(connect);
 					}
-					
+
+					cmFacade = new CMFacadeImpl(connect);
 					loginStage.close();
 					showMain(primaryStage);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				
+
 			}
 		});
 	}
@@ -107,7 +113,7 @@ public class CognosTools extends Application implements Skeleton {
 
 		primaryStage.show();
 
-		contentNav = (TreeView<BaseClass>) parent.lookup("#contentNav");
+		contentNav = (TreeView<ContentItem>) parent.lookup("#contentNav");
 
 		mainPane = (SplitPane) parent.lookup("#mainPane");
 		mainPane.getItems().remove(1);
@@ -141,7 +147,7 @@ public class CognosTools extends Application implements Skeleton {
 	}
 
 	@Override
-	public TreeItem<BaseClass> getContentTree() {
+	public TreeItem<ContentItem> getContentTree() {
 		return root;
 	}
 
@@ -156,13 +162,23 @@ public class CognosTools extends Application implements Skeleton {
 	}
 
 	@Override
-	public TreeView<BaseClass> getContentNav() {
+	public TreeView<ContentItem> getContentNav() {
 		return contentNav;
 	}
 
 	@Override
 	public SplitPane getMainPane() {
 		return mainPane;
+	}
+
+	@Override
+	public CMFacade getCMFacade() {
+		return cmFacade;
+	}
+
+	@Override
+	public CRNConnect getConnect() {
+		return connect;
 	}
 
 }
