@@ -4,7 +4,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItemBuilder;
-import javafx.scene.control.cell.CheckBoxTreeCell;
+import javafx.scene.control.TreeCell;
 
 import com.cognos.developer.schemas.bibus._3.ClassEnum;
 import com.ewell.cognos.content.ContentItem;
@@ -16,7 +16,7 @@ import com.ewell.ui.handler.ContentSpecHandler;
  * @author Bluesky Yao
  * 
  */
-public class DefaultContentCell extends CheckBoxTreeCell<ContentItem> {
+public class DefaultContentCell extends TreeCell<ContentItem> {
 
 	public DefaultContentCell() {
 		
@@ -31,7 +31,7 @@ public class DefaultContentCell extends CheckBoxTreeCell<ContentItem> {
 				else {
 					setText(arg2.getName());
 
-					if (arg2.getType().equals(ClassEnum.value136.getValue())) {
+					if (arg2.getType().equals(ClassEnum.value138.getValue())) {
 						ContextMenu cm = new ContextMenu(
 								MenuItemBuilder.create().text("预览")
 										.onAction(new ContentHtmlHandler(arg2))

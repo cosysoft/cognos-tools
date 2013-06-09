@@ -123,7 +123,7 @@ public class Logon {
 
 		userID = "admin";
 		password = "123";
-		nameSpace = "BLRMYY";
+		nameSpace = "OpenDJ";
 		StringBuffer credentialXML = new StringBuffer();
 		credentialXML.append("<credential>");
 
@@ -161,6 +161,8 @@ public class Logon {
 			password = "";
 			nameSpace = "";
 			credentialString = "";
+			
+			remoteEx.printStackTrace();
 			return "";
 		}
 

@@ -111,8 +111,8 @@ public class CRNConnect {
 
 	// Create a variable that contains the default URL for Content Manager.
 	// sn_dg_prm_smpl_connect_start_2
-	public static String CM_URL = "http://biserver:9300/p2pd/servlet/dispatch";
-	public static String GATEWAY_URL = "http://gateway2/cognos10/cgi-bin/cognos.cgi?b_action=xts.run&m=portal/launch.xts&ui.tool=CognosViewer&ui=h1h2h3h4&ui.action=run&run.outputFormat=&run.prompt=true";
+	public static String CM_URL = "http://baserver:9300/p2pd/servlet/dispatch";
+	public static String GATEWAY_URL = "http://baserver/ibmcognos/cgi-bin/cognos.cgi?b_action=xts.run&m=portal/launch.xts&ui.tool=CognosViewer&ui=h1h2h3h4&ui.action=run&run.outputFormat=&run.prompt=true";
 
 	// sn_dg_prm_smpl_connect_end_2
 

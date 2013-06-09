@@ -3,6 +3,7 @@ package com.ewell.cognos.content;
 import java.util.List;
 
 import com.cognos.developer.schemas.bibus._3.BaseClass;
+import com.cognos.developer.schemas.bibus._3.ClassEnum;
 
 /**
  * 
@@ -55,8 +56,8 @@ public class ContentItem {
 		}
 		return null;
 	}
-	
-	public String getStoreId(){
+
+	public String getStoreId() {
 		if (content != null) {
 			return content.getStoreID().getValue().get_value();
 		}
@@ -66,6 +67,12 @@ public class ContentItem {
 	public BaseClass getContent() {
 		return content;
 	}
-	
-	
+
+	public boolean isTypeOfReport() {
+		return getType().equals(ClassEnum.value138.getValue());
+	}
+
+	public boolean isTypeOfFolder() {
+		return getType().equals(ClassEnum.value54.getValue());
+	}
 }

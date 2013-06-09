@@ -29,7 +29,7 @@ import com.ibm.cognos.ReportObject;
 public class CMFacadeImpl implements CMFacade {
 
 	private CRNConnect connect;
-	private static String searchPath = "/content/folder[@name='练习文件夹']";
+	private static String searchPath = "/content";
 
 	@Override
 	public ContentItem getFolder(String searchPath) {
@@ -91,7 +91,11 @@ public class CMFacadeImpl implements CMFacade {
 		List<ContentItem> items = new ArrayList<ContentItem>();
 
 		for (int i = 0; i < children.length; i++) {
-			items.add(new ContentItem(children[i]));
+			ContentItem item = new ContentItem(children[i]);
+			if (item.isTypeOfReport() || item.isTypeOfFolder()) {
+				items.add(item);
+			}
+
 		}
 		return items;
 	}

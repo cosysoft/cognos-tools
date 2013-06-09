@@ -20,7 +20,7 @@ public class ContentTreeService extends Service<TreeItem<ContentItem>> {
 
 			@Override
 			protected TreeItem<ContentItem> call() throws Exception {
-				return CognosTools.skeleton.getCMFacade().buildContentTreeCK();
+				return CognosTools.skeleton.getCMFacade().buildContentTree();
 			}
 		};
 	}

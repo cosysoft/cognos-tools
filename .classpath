@@ -2,29 +2,30 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/activation.jar"/>
-	<classpathentry kind="lib" path="lib/axis.jar"/>
-	<classpathentry kind="lib" path="lib/axisCognosClient.jar" sourcepath="lib/axisCognosClientSrc.jar"/>
-	<classpathentry kind="lib" path="lib/cognos-axis.jar"/>
-	<classpathentry kind="lib" path="lib/cognosClient.jar"/>
-	<classpathentry kind="lib" path="lib/commons-discovery-0.2.jar"/>
-	<classpathentry kind="lib" path="lib/commons-logging-1.1.jar"/>
-	<classpathentry kind="lib" path="lib/commons-logging-adapters-1.1.jar"/>
-	<classpathentry kind="lib" path="lib/commons-logging-api-1.1.jar"/>
-	<classpathentry kind="lib" path="lib/dom4j-1.6.1.jar"/>
-	<classpathentry kind="lib" path="lib/jaxen-1.1.1.jar"/>
-	<classpathentry kind="lib" path="lib/jaxrpc.jar"/>
-	<classpathentry kind="lib" path="lib/jstl.jar"/>
-	<classpathentry kind="lib" path="lib/log4j-1.2.8.jar"/>
-	<classpathentry kind="lib" path="lib/mail.jar"/>
-	<classpathentry kind="lib" path="lib/resolver.jar"/>
-	<classpathentry kind="lib" path="lib/saaj.jar"/>
-	<classpathentry kind="lib" path="lib/serializer.jar"/>
-	<classpathentry kind="lib" path="lib/standard.jar"/>
-	<classpathentry kind="lib" path="lib/testIBMFakeTrustSocketFactory.jar"/>
-	<classpathentry kind="lib" path="lib/wsdl4j-1.5.1.jar"/>
-	<classpathentry kind="lib" path="lib/xalan.jar"/>
-	<classpathentry kind="lib" path="lib/xercesImpl.jar"/>
-	<classpathentry kind="lib" path="lib/xml-apis.jar"/>
+	<classpathentry kind="lib" path="lib10.2/lib/activation.jar"/>
+	<classpathentry kind="lib" path="lib10.2/lib/axis.jar"/>
+	<classpathentry kind="lib" path="lib10.2/lib/axisCognosClient.jar" sourcepath="lib10.2/lib/axisCognosClientSrc.jar"/>
+	<classpathentry kind="lib" path="lib10.2/lib/axisReportNetClient.jar"/>
+	<classpathentry kind="lib" path="lib10.2/lib/cognos-axis.jar"/>
+	<classpathentry kind="lib" path="lib10.2/lib/cognosClient.jar"/>
+	<classpathentry kind="lib" path="lib10.2/lib/commons-discovery-0.2.jar"/>
+	<classpathentry kind="lib" path="lib10.2/lib/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="lib10.2/lib/commons-logging-adapters-1.1.jar"/>
+	<classpathentry kind="lib" path="lib10.2/lib/commons-logging-api-1.1.jar"/>
+	<classpathentry kind="lib" path="lib10.2/lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib10.2/lib/jaxen-1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib10.2/lib/jaxrpc.jar"/>
+	<classpathentry kind="lib" path="lib10.2/lib/jstl.jar"/>
+	<classpathentry kind="lib" path="lib10.2/lib/log4j-1.2.8.jar"/>
+	<classpathentry kind="lib" path="lib10.2/lib/mail.jar"/>
+	<classpathentry kind="lib" path="lib10.2/lib/resolver.jar"/>
+	<classpathentry kind="lib" path="lib10.2/lib/saaj.jar"/>
+	<classpathentry kind="lib" path="lib10.2/lib/serializer.jar"/>
+	<classpathentry kind="lib" path="lib10.2/lib/standard.jar"/>
+	<classpathentry kind="lib" path="lib10.2/lib/testIBMFakeTrustSocketFactory.jar"/>
+	<classpathentry kind="lib" path="lib10.2/lib/wsdl4j-1.5.1.jar"/>
+	<classpathentry kind="lib" path="lib10.2/lib/xalan.jar"/>
+	<classpathentry kind="lib" path="lib10.2/lib/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="lib10.2/lib/xml-apis.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
