@@ -82,11 +82,11 @@ public class App extends AnchorPane {
 
 		Menu file = MenuBuilder
 				.create()
-				.text("file")
-				.items(MenuItemBuilder.create().text("New").build(),
-						MenuItemBuilder.create().text("New Batch Update")
+				.text("文件")
+				.items(MenuItemBuilder.create().text("新建").build(),
+						MenuItemBuilder.create().text("新建批量更新")
 								.onAction(new BatchReportEdit()).build(),
-						MenuItemBuilder.create().text("Exit")
+						MenuItemBuilder.create().text("退出")
 								.onAction(new EventHandler<ActionEvent>() {
 
 									@Override

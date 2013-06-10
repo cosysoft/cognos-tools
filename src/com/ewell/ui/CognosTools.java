@@ -10,6 +10,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
@@ -17,12 +18,15 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import javafx.util.Callback;
 
 import com.ewell.cognos.content.CMFacade;
 import com.ewell.cognos.content.CMFacadeImpl;
 import com.ewell.cognos.content.ContentItem;
+import com.ewell.ui.cell.CheckBoxContentCell;
 import com.ewell.ui.launch.Skeleton;
 import com.ewell.ui.task.ContentTreeService;
+import com.ewell.ui.util.CMUtil;
 import com.ewell.ui.util.FXMLLoaderUtil;
 import com.ewell.ui.view.App;
 import com.ewell.ui.view.Login;
@@ -37,7 +41,7 @@ import com.ibm.cognos.Logon;
 public class CognosTools extends Application implements Skeleton {
 
 	private Window mainWindow;
-	private TreeItem<ContentItem> root;
+	private ContentItem root;
 	private TreeView<ContentItem> contentNav;
 	private SplitPane mainPane;
 
@@ -147,11 +151,6 @@ public class CognosTools extends Application implements Skeleton {
 	}
 
 	@Override
-	public TreeItem<ContentItem> getContentTree() {
-		return root;
-	}
-
-	@Override
 	public Window getMainWindow() {
 		return mainWindow;
 	}
@@ -179,6 +178,29 @@ public class CognosTools extends Application implements Skeleton {
 	@Override
 	public CRNConnect getConnect() {
 		return connect;
+	}
+
+	@Override
+	public ContentItem getRootContent() {
+		if (root == null) {
+			root = cmFacade.buildContentItem();
+		}
+		return root;
+	}
+
+	@Override
+	public TreeView<ContentItem> getChoiceView() {
+		ContentItem root = this.getRootContent();
+		TreeItem<ContentItem> ti = CMUtil.createNode(root);
+		TreeView<ContentItem> ts = new TreeView<ContentItem>(ti);
+		ts.setCellFactory(new Callback<TreeView<ContentItem>, TreeCell<ContentItem>>() {
+
+			@Override
+			public TreeCell<ContentItem> call(TreeView<ContentItem> arg0) {
+				return new CheckBoxContentCell();
+			}
+		});
+		return ts;
 	}
 
 }

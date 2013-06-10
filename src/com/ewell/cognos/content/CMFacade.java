@@ -14,7 +14,7 @@ public interface CMFacade {
 
 	ContentItem getFolder(String serachPath);
 
-	ContentItem buildContentTree(ContentItem root);
+	ContentItem buildContentItem();
 
 	TreeItem<ContentItem> buildContentTree();
 

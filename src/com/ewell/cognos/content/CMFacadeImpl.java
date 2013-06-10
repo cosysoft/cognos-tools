@@ -101,7 +101,9 @@ public class CMFacadeImpl implements CMFacade {
 	}
 
 	@Override
-	public ContentItem buildContentTree(ContentItem root) {
+	public ContentItem buildContentItem() {
+
+		ContentItem root = this.getFolder(searchPath);
 		innerBuild(root);
 		return root;
 	}

@@ -2,7 +2,6 @@ package com.ewell.ui.launch;
 
 import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
-import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.stage.Window;
 
@@ -16,13 +15,6 @@ import com.ibm.cognos.CRNConnect;
  * 
  */
 public interface Skeleton {
-
-	/**
-	 * connection public folder
-	 * 
-	 * @return
-	 */
-	TreeItem<ContentItem> getContentTree();
 
 	/**
 	 * app main window
@@ -40,5 +32,10 @@ public interface Skeleton {
 	CMFacade getCMFacade();
 	
 	CRNConnect getConnect();
+	
+	ContentItem getRootContent();
+	
+	TreeView<ContentItem> getChoiceView();
+	
 
 }

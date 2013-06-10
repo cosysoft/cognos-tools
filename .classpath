@@ -27,5 +27,6 @@
 	<classpathentry kind="lib" path="lib10.2/lib/xalan.jar"/>
 	<classpathentry kind="lib" path="lib10.2/lib/xercesImpl.jar"/>
 	<classpathentry kind="lib" path="lib10.2/lib/xml-apis.jar"/>
+	<classpathentry kind="lib" path="lib10.2/controlsfx-8.0.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

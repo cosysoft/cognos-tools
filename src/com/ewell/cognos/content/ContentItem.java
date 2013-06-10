@@ -2,6 +2,9 @@ package com.ewell.cognos.content;
 
 import java.util.List;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 import com.cognos.developer.schemas.bibus._3.BaseClass;
 import com.cognos.developer.schemas.bibus._3.ClassEnum;
 
@@ -15,6 +18,9 @@ public class ContentItem {
 	private BaseClass content;
 
 	private List<ContentItem> children;
+
+	public final BooleanProperty selectedProperty = new SimpleBooleanProperty(
+			false);
 
 	public ContentItem(BaseClass content) {
 		super();
@@ -75,4 +81,13 @@ public class ContentItem {
 	public boolean isTypeOfFolder() {
 		return getType().equals(ClassEnum.value54.getValue());
 	}
+
+	@Override
+	public String toString() {
+		return "ContentItem [selectedProperty=" + selectedProperty
+				+ ", getName()=" + getName() + ", getChildren()="
+				+ getChildren() + ", isChildrenHas()=" + isChildrenHas()
+				+ ", getType()=" + getType() + "]";
+	}
+
 }
